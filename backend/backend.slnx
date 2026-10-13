@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="backend/backend.csproj" />
+  <Project Path="src/RegistroConsultas.Domain/RegistroConsultas.Domain.csproj" />
+  <Project Path="src/RegistroConsultas.Application/RegistroConsultas.Application.csproj" />
+  <Project Path="src/RegistroConsultas.Infrastructure/RegistroConsultas.Infrastructure.csproj" />
 </Solution>

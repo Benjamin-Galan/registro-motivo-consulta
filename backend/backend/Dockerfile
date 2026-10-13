@@ -10,18 +10,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["backend.csproj", "./"]
-RUN dotnet restore "./backend.csproj"
-COPY . .
-RUN dotnet build "./backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY ["backend/backend.csproj", "backend/"]
+COPY ["src/", "src/"]
+RUN dotnet restore "backend/backend.csproj"
+COPY ["backend/", "backend/"]
+RUN dotnet build "backend/backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Esta fase se usa para publicar el proyecto de servicio que se copiará en la fase final.
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./backend.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "backend/backend.csproj" -c $BUILD_CONFIGURATION --no-restore -o /app/publish /p:UseAppHost=false
 
 # Esta fase se usa en producción o cuando se ejecuta desde VS en modo normal (valor predeterminado cuando no se usa la configuración de depuración)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "backend.dll"]
+ENTRYPOINT ["dotnet", "RegistroConsultas.Api.dll"]

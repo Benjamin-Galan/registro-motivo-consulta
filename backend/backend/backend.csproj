@@ -6,11 +6,22 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>ac030a48-4bf8-4114-a904-21c87f78346f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <AssemblyName>RegistroConsultas.Api</AssemblyName>
+    <RootNamespace>RegistroConsultas.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.24.2-preview.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\RegistroConsultas.Application\RegistroConsultas.Application.csproj" />
+    <ProjectReference Include="..\src\RegistroConsultas.Infrastructure\RegistroConsultas.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
